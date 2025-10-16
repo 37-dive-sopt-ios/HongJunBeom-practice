@@ -46,6 +46,16 @@ final class WelcomeViewController: UIViewController {
         return button
     }()
     
+    // 이미지 변경 Segment 추가
+    private lazy var imageSegment: UISegmentedControl = {
+        let segment = UISegmentedControl(items: ["토끼", "당근"])
+        segment.frame = CGRect(x: 145, y: 375, width: 120, height: 30)
+        segment.selectedSegmentIndex = 0
+        segment.addTarget(self, action: #selector(segmentControlValueChanged), for: .valueChanged)
+        return segment
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +66,7 @@ final class WelcomeViewController: UIViewController {
     }
     
     private func setLayout() {
-        [imageView, welcomeLabel, goHomeButton, backToLoginButton].forEach {
+        [imageView, welcomeLabel, goHomeButton, backToLoginButton, imageSegment].forEach {
             self.view.addSubview($0)
         }
     }
@@ -70,6 +80,17 @@ final class WelcomeViewController: UIViewController {
         }
     }
     
+    // Segment 작동 함수
+    @objc
+    private func segmentControlValueChanged() {
+        let index = imageSegment.selectedSegmentIndex
+        if index == 0 {
+            self.imageView.image = UIImage(named: "logo2")
+        } else {
+            self.imageView.image = UIImage(named: "carrot")
+        }
+    }
+    
     private func bindID() {
         if let name = name {
             self.welcomeLabel.text = "\(name)님 \n반가워요!"
@@ -77,11 +98,11 @@ final class WelcomeViewController: UIViewController {
             self.welcomeLabel.text = "환영합니다."
         }
         
-//        guard let name = name else { return }
-//        self.welcomeLabel.text = "\(name)님 \n반가워요!"
+        //        guard let name = name else { return }
+        //        self.welcomeLabel.text = "\(name)님 \n반가워요!"
     }
     
-     func setLabelText(name: String?) {
+    func setLabelText(name: String?) {
         self.name = name
     }
 }
