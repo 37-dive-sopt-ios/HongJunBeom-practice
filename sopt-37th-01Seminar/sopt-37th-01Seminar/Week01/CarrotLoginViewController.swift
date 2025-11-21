@@ -10,7 +10,7 @@ import UIKit
 
 class CarrotLoginViewController: UIViewController {
     
-    lazy var message: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 85, y: 163, width: 240, height: 50))
         label.text = "동네라서 가능한 모든 것\n당근에서 가까운 이웃과 함께해요."
         label.font = .h2
@@ -103,7 +103,7 @@ class CarrotLoginViewController: UIViewController {
     
     private func setHierarchy() {
         let components = [
-            message,
+            titleLabel,
             emailTextField,
             emailClearButton,
             passwordTextField,
@@ -160,16 +160,3 @@ class CarrotLoginViewController: UIViewController {
     
 }
 
-extension UITextField {
-    func addLeftPadding(_ width: CGFloat = 10) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
-        self.leftView = paddingView
-        self.leftViewMode = ViewMode.always
-    }
-    
-    func addRightPadding(_ width: CGFloat = 30) {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
-        self.rightView = paddingView
-        self.rightViewMode = ViewMode.always
-    }
-}
